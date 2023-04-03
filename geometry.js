@@ -4,3 +4,9 @@ class Point2D {
         this.y = y
     }
 }
+
+class Line2D {
+    constructor(points) {
+        this.points = points
+    }
+}
