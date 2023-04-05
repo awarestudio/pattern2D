@@ -24,6 +24,35 @@ class Line2D extends Pattern2D {
             points[index] = createVector(xArray[index], yArray[index])
         }
 
-        return this.fromPoints(points)
+        return new Line2D(points)
+    }
+}
+
+class Grid2D extends Pattern2D {
+    static fromTwoVertices(topLeft, bottomRight, vNum, hNum) {
+        let bottomLeft = createVector(topLeft.x, bottomRight.y)
+        
+        let xArray = linspace(start.x, end.x, hNum)
+        let yArray = linspace(start.y, bottomLeft.y, vNum)
+        
+        let points = []
+        for (let yIndex = 0; yIndex < vNum; yIndex++) {
+            let xPoints = []
+            for (let xIndex = 0; xIndex < hNum; xIndex++) {
+                xPoints.push(createVector(xArray[xIndex], yArray[yIndex]))
+            }
+            points.push(xPoints)
+        }
+
+        return new Grid2D(points)
+    }
+
+    debug(size=1) {
+        for (let yIndex = 0; yIndex < this.points.length; yIndex++) {
+            let xPoints = this.points[yIndex]
+            for (let xIndex = 0; xIndex < xPoints.length; xIndex++) {
+                ellipse(this.points[yIndex][xIndex].x, this.points[yIndex][xIndex].y, size)
+            }
+        }
     }
 }
