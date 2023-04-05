@@ -1,2 +1,2 @@
-# geometry
-awarestudio geometry lib
+# Pattern2D
+awarestudio pattern2D lib
