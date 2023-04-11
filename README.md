@@ -1,2 +1,2 @@
-# Pattern2D
-awarestudio pattern2D lib
+# pattern2D
+Repository for geometric pattern generation, used across multiple projects.
