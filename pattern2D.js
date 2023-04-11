@@ -29,11 +29,11 @@ class Line2D extends Pattern2D {
 }
 
 class Grid2D extends Pattern2D {
-    static fromTwoVertices(topLeft, bottomRight, vNum, hNum) {
+    static fromTwoPoints(topLeft, bottomRight, vNum, hNum) {
         let bottomLeft = createVector(topLeft.x, bottomRight.y)
         
-        let xArray = linspace(start.x, end.x, hNum)
-        let yArray = linspace(start.y, bottomLeft.y, vNum)
+        let [xArray, xStep] = linspace(topLeft.x, bottomRight.x, hNum, false, true)
+        let [yArray, yStep] = linspace(topLeft.y, bottomLeft.y, vNum, false, true)
         
         let points = []
         for (let yIndex = 0; yIndex < vNum; yIndex++) {
@@ -44,7 +44,16 @@ class Grid2D extends Pattern2D {
             points.push(xPoints)
         }
 
-        return new Grid2D(points)
+        let grid = new Grid2D(points)
+        grid.xStep = xStep
+        grid.yStep = yStep
+        return grid
+    }
+
+    static fromOnePoint(topLeft, vNum, hNum, vStep, hStep) {
+
+        let bottomRight = createVector(topLeft.x + hNum * hStep, topLeft.y + vNum * vStep)
+        return Grid2D.fromTwoPoints(topLeft, bottomRight, vNum, hNum)
     }
 
     debug(size=1) {
